@@ -19,10 +19,16 @@
     }
 }
 
+html,
 body {
-    background-color: #ffffff !important;
+    /* background-color: #ffffff !important; */
     color: #000000 !important;
     font-family: Arial, Helvetica, sans-serif;
+    background-image: url("/fondo.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 * {
