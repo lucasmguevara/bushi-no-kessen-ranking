@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 async function getRanking() {
-  const res = await fetch("http://localhost:3000/api/clans", { cache: "no-store" });
+  const res = await fetch("/api/clans", { cache: "no-store" });
   return res.json() as Promise<{
     data: Array<{ id: string; name: string; logoUrl?: string; mon: number; position: number }>;
   }>;
