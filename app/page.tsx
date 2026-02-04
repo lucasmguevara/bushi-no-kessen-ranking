@@ -40,10 +40,10 @@ export default function Page() {
   return (
     <main style={{ maxWidth: 560, margin: "0 auto", padding: 16, fontFamily: "system-ui" }}>
       <div style={{ display: "flex", justifyContent: "center", margin: "10px 0 16px" }}>
-        <img src="/logo.png" alt="Bushi no Kessen" style={{ height: 80, objectFit: "contain" }} />
+        <img src="/logo.png" alt="Bushi no Kessen" style={{ height: 100, objectFit: "contain" }} />
       </div>
 
-      <h1 style={{ textAlign: "center", marginBottom: 12 }}>Posiciones por Mon</h1>
+      <h1 style={{ textAlign: "center", marginBottom: 14, fontWeight:"bold" }}>Posiciones por Mon</h1>
 
       {loading ? (
         <div style={{ textAlign: "center", opacity: 0.7 }}>Cargando…</div>
