@@ -54,16 +54,36 @@ export default function AdminPage() {
   const [msg, setMsg] = useState<string>("");
 
   async function load() {
-    setLoading(true);
+  setLoading(true);
+  try {
     const res = await fetch("/api/clans", { cache: "no-store" });
+    if (!res.ok) {
+      const txt = await res.text();
+      setMsg(`Error cargando: ${res.status} ${txt.slice(0, 80)}...`);
+      setRows([]);
+      return;
+    }
     const json = await res.json();
     setRows(json.data ?? []);
+  } catch (e: any) {
+    setMsg(e?.message ?? "Error desconocido cargando datos");
+    setRows([]);
+  } finally {
     setLoading(false);
   }
-
+}
   useEffect(() => {
     load();
   }, []);
+
+  useEffect(() => {
+  const saved = localStorage.getItem("bushi_admin_token");
+  if (saved) setToken(saved);
+}, []);
+
+useEffect(() => {
+  if (token) localStorage.setItem("bushi_admin_token", token);
+}, [token]);
 
   async function save(clanId: string, mon: number) {
     setMsg("");
@@ -92,10 +112,11 @@ export default function AdminPage() {
     save(c.id, newMon);
   }
 
-  function reset(c: Clan) {
+function reset(c: Clan) {
+  if (confirm(`¿Resetear a 0 el clan "${c.name}"?`)) {
     save(c.id, 0);
   }
-
+}
   return (
     <main style={{ maxWidth: 560, margin: "0 auto", padding: 16, fontFamily: "system-ui" }}>
       <div style={{ display: "flex", justifyContent: "center", margin: "10px 0 16px" }}>
